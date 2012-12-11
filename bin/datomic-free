@@ -1,0 +1,7 @@
+#!/bin/bash
+
+DATOMIC_FREE_HOME=$HOME/.datomic-free
+DATOMIC_FREE=$DATOMIC_FREE_HOME/datomic-free-latest
+
+cd $DATOMIC_FREE
+bin/transactor config/samples/free-transactor-template.properties
