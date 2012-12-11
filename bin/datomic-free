@@ -1,7 +1,16 @@
 #!/bin/bash
+set -e
 
 DATOMIC_FREE_HOME=$HOME/.datomic-free
 DATOMIC_FREE=$DATOMIC_FREE_HOME/datomic-free-latest
 
-cd $DATOMIC_FREE
-bin/transactor config/samples/free-transactor-template.properties
+command="$1"
+case "$command" in
+"" | "-h" | "--help")
+  echo "datomic-free [-h|--help] [start]"
+  ;;
+"start")
+  cd $DATOMIC_FREE
+  bin/transactor config/samples/free-transactor-template.properties
+  ;;
+esac
