@@ -4,13 +4,37 @@ set -e
 DATOMIC_FREE_HOME=$HOME/.datomic-free
 DATOMIC_FREE=$DATOMIC_FREE_HOME/datomic-free-latest
 
+# from https://github.com/relevance/diametric/blob/master/script/vendor-datomic-free
+download-datomic () {
+  DEFAULT_DATOMIC_VERSION="0.8.3599"
+  VERSION=${1:-$DEFAULT_DATOMIC_VERSION}
+
+  if [ ! -d "$DATOMIC_FREE_HOME/datomic-free-$VERSION" ]; then
+    echo "Downloading Datomic Free $VERSION"
+
+    cd $DATOMIC_FREE_HOME
+    curl --progress-bar -o datomic-free.zip "http://downloads.datomic.com/$VERSION/datomic-free-$VERSION.zip"
+    unzip datomic-free.zip > /dev/null
+    rm datomic-free.zip
+
+    echo "Done. Datomic Free $VERSION is now available"
+
+  else
+    echo "Datomic Free $VERSION is already present"
+  fi
+
+}
+
 command="$1"
 case "$command" in
 "" | "-h" | "--help")
-  echo "datomic-free [-h|--help] [start]"
+  echo "datomic-free [-h|--help] [start|update]"
   ;;
 "start")
   cd $DATOMIC_FREE
   bin/transactor config/samples/free-transactor-template.properties
+  ;;
+"update")
+  download-datomic $2
   ;;
 esac
