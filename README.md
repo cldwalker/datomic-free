@@ -38,6 +38,7 @@ See LICENSE.txt. This project is in no way affiliated with Datomic (Metadata Par
 * Thanks to @rkneufeld for the downloading function of the shell script
 
 ## TODO
+* Move/use existing data/config dirs
 * Allow other config and args to bin/transactor
 * rest command to execute bin/rest
 * better help
