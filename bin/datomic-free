@@ -2,7 +2,7 @@
 set -e
 
 DATOMIC_FREE_HOME=$HOME/.datomic-free
-DATOMIC_FREE=$DATOMIC_FREE_HOME/datomic-free-active
+DATOMIC_FREE_ACTIVE=$DATOMIC_FREE_HOME/datomic-free-active
 
 get-latest-datomic-version () {
   curl -s http://downloads.datomic.com/free.html | grep -o 'datomic-free.*latest' |
@@ -25,11 +25,11 @@ download-and-use-datomic () {
 
 use-datomic () {
   version="$1"
-  rm -f $DATOMIC_FREE
-  ln -s "$DATOMIC_FREE_HOME/datomic-free-$version" $DATOMIC_FREE
+  rm -f $DATOMIC_FREE_ACTIVE
+  ln -s "$DATOMIC_FREE_HOME/datomic-free-$version" $DATOMIC_FREE_ACTIVE
 }
 
-update-datomic () {
+download-datomic () {
   version="$1"
 
   if [ ! -d "$DATOMIC_FREE_HOME/datomic-free-$version" ]; then
@@ -50,27 +50,38 @@ update-datomic () {
 
 }
 
+download-latest-datomic () {
+  echo "Finding latest datomic version..."
+  version=$(get-latest-datomic-version)
+
+  if [ "$version" = "" ]; then
+    echo "The latest version could not be found. Install a specific version with \"datomic update VERSION\"."
+  else
+    download-datomic $version
+  fi
+}
+
 command="$1"
 case "$command" in
 "" | "-h" | "--help")
   echo "datomic-free [-h|--help] [start|update|use]"
   ;;
 "start")
-  cd $DATOMIC_FREE
+  if [ ! -d $DATOMIC_FREE_ACTIVE ]; then
+    echo No previous datomic-free installation detected. Setting you up...
+    mkdir -p $DATOMIC_FREE_HOME
+    download-latest-datomic
+  fi
+
+  cd $DATOMIC_FREE_ACTIVE
+  echo "Starting $(basename $(readlink $DATOMIC_FREE_ACTIVE))..."
   bin/transactor config/samples/free-transactor-template.properties
   ;;
 "update")
   if [ "$2" != "" ]; then
-    update-datomic $2
+    download-datomic $2
   else
-    echo "Finding latest datomic version..."
-    version=$(get-latest-datomic-version)
-
-    if [ "$version" = "" ]; then
-      echo "The latest version could not be found. Try passing a specific version to update."
-    else
-      update-datomic $version
-    fi
+    download-latest-datomic
   fi
   ;;
 "use")
