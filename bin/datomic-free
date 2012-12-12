@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-set -e
+#!/usr/bin/env bash -e
 
 DATOMIC_FREE_HOME=$HOME/.datomic-free
 DATOMIC_FREE_VERSIONS=$DATOMIC_FREE_HOME/versions
