@@ -1,8 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
 DATOMIC_FREE_HOME=$HOME/.datomic-free
 DATOMIC_FREE=$DATOMIC_FREE_HOME/datomic-free-latest
+
+get-latest-datomic-version () {
+  curl -s http://downloads.datomic.com/free.html | grep -o 'datomic-free.*latest' |
+    sed 's/datomic-free-\(.*\)\.zip.*$/\1/g'
+}
 
 # mostly from https://github.com/relevance/diametric/blob/master/script/vendor-datomic-free
 download-and-link-datomic () {
@@ -37,6 +42,13 @@ case "$command" in
   bin/transactor config/samples/free-transactor-template.properties
   ;;
 "update")
-  download-and-link-datomic $2
+  echo "Fetching latest datomic version..."
+  version=$(get-latest-datomic-version)
+
+  if [ "$version" = "" ]; then
+    echo "The latest version could not be fetched."
+  else
+    download-and-link-datomic $version
+  fi
   ;;
 esac
