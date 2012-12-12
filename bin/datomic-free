@@ -2,7 +2,7 @@
 set -e
 
 DATOMIC_FREE_HOME=$HOME/.datomic-free
-DATOMIC_FREE=$DATOMIC_FREE_HOME/datomic-free-latest
+DATOMIC_FREE=$DATOMIC_FREE_HOME/datomic-free-active
 
 get-latest-datomic-version () {
   curl -s http://downloads.datomic.com/free.html | grep -o 'datomic-free.*latest' |
@@ -10,7 +10,7 @@ get-latest-datomic-version () {
 }
 
 # mostly from https://github.com/relevance/diametric/blob/master/script/vendor-datomic-free
-download-and-link-datomic () {
+download-and-use-datomic () {
   version="$1"
 
   echo "Downloading Datomic Free $version..."
@@ -19,9 +19,14 @@ download-and-link-datomic () {
   unzip datomic-free.zip > /dev/null
   rm datomic-free.zip
 
+  use-datomic $1
+  echo "Done. Datomic Free $version is now available."
+}
+
+use-datomic () {
+  version="$1"
   rm -f $DATOMIC_FREE
   ln -s "$DATOMIC_FREE_HOME/datomic-free-$version" $DATOMIC_FREE
-  echo "Done. Datomic Free $version is now available."
 }
 
 update-datomic () {
@@ -34,7 +39,7 @@ update-datomic () {
     set -e
 
     if [ "$grep_exit_status" = "0" ]; then
-      download-and-link-datomic $version
+      download-and-use-datomic $version
     else
       echo \"$version\" is not a valid version. See http://downloads.datomic.com/free.html for a list of versions.
     fi
@@ -48,7 +53,7 @@ update-datomic () {
 command="$1"
 case "$command" in
 "" | "-h" | "--help")
-  echo "datomic-free [-h|--help] [start|update]"
+  echo "datomic-free [-h|--help] [start|update|use]"
   ;;
 "start")
   cd $DATOMIC_FREE
@@ -66,6 +71,13 @@ case "$command" in
     else
       update-datomic $version
     fi
+  fi
+  ;;
+"use")
+  if [ "$2" = "" ]; then
+    echo "No version given."
+  else
+    use-datomic $2
   fi
   ;;
 esac
