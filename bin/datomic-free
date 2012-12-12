@@ -11,23 +11,36 @@ get-latest-datomic-version () {
 
 # mostly from https://github.com/relevance/diametric/blob/master/script/vendor-datomic-free
 download-and-link-datomic () {
-  DEFAULT_DATOMIC_VERSION="0.8.3599"
-  VERSION=${1:-$DEFAULT_DATOMIC_VERSION}
+  version="$1"
 
-  if [ ! -d "$DATOMIC_FREE_HOME/datomic-free-$VERSION" ]; then
-    echo "Downloading Datomic Free $VERSION"
+  echo "Downloading Datomic Free $version..."
+  cd $DATOMIC_FREE_HOME
+  curl --progress-bar -o datomic-free.zip "http://downloads.datomic.com/$version/datomic-free-$version.zip"
+  unzip datomic-free.zip > /dev/null
+  rm datomic-free.zip
 
-    cd $DATOMIC_FREE_HOME
-    curl --progress-bar -o datomic-free.zip "http://downloads.datomic.com/$VERSION/datomic-free-$VERSION.zip"
-    unzip datomic-free.zip > /dev/null
-    rm datomic-free.zip
+  rm -f $DATOMIC_FREE
+  ln -s "$DATOMIC_FREE_HOME/datomic-free-$version" $DATOMIC_FREE
+  echo "Done. Datomic Free $version is now available."
+}
 
-    rm -f $DATOMIC_FREE
-    ln -s "$DATOMIC_FREE_HOME/datomic-free-$VERSION" $DATOMIC_FREE
-    echo "Done. Datomic Free $VERSION is now available"
+update-datomic () {
+  version="$1"
+
+  if [ ! -d "$DATOMIC_FREE_HOME/datomic-free-$version" ]; then
+    set +e
+    curl -s --head "http://downloads.datomic.com/$version/datomic-free-$version.zip" | head -n 1 | grep -q 200
+    grep_exit_status=$?
+    set -e
+
+    if [ "$grep_exit_status" = "0" ]; then
+      download-and-link-datomic $version
+    else
+      echo \"$version\" is not a valid version. See http://downloads.datomic.com/free.html for a list of versions.
+    fi
 
   else
-    echo "Datomic Free $VERSION is already present"
+    echo "Datomic Free $version is already present."
   fi
 
 }
@@ -42,13 +55,17 @@ case "$command" in
   bin/transactor config/samples/free-transactor-template.properties
   ;;
 "update")
-  echo "Fetching latest datomic version..."
-  version=$(get-latest-datomic-version)
-
-  if [ "$version" = "" ]; then
-    echo "The latest version could not be fetched."
+  if [ "$2" != "" ]; then
+    update-datomic $2
   else
-    download-and-link-datomic $version
+    echo "Finding latest datomic version..."
+    version=$(get-latest-datomic-version)
+
+    if [ "$version" = "" ]; then
+      echo "The latest version could not be found. Try passing a specific version to update."
+    else
+      update-datomic $version
+    fi
   fi
   ;;
 esac
