@@ -2,7 +2,8 @@
 set -e
 
 DATOMIC_FREE_HOME=$HOME/.datomic-free
-DATOMIC_FREE_ACTIVE=$DATOMIC_FREE_HOME/datomic-free-active
+DATOMIC_FREE_VERSIONS=$DATOMIC_FREE_HOME/versions
+DATOMIC_FREE_ACTIVE=$DATOMIC_FREE_HOME/active
 
 get-latest-datomic-version () {
   curl -s http://downloads.datomic.com/free.html | grep -o 'datomic-free.*latest' |
@@ -14,7 +15,8 @@ download-and-use-datomic () {
   version="$1"
 
   echo "Downloading Datomic Free $version..."
-  cd $DATOMIC_FREE_HOME
+  mkdir -p $DATOMIC_FREE_VERSIONS
+  cd $DATOMIC_FREE_VERSIONS
   curl --progress-bar -o datomic-free.zip "http://downloads.datomic.com/$version/datomic-free-$version.zip"
   unzip datomic-free.zip > /dev/null
   rm datomic-free.zip
@@ -26,13 +28,13 @@ download-and-use-datomic () {
 use-datomic () {
   version="$1"
   rm -f $DATOMIC_FREE_ACTIVE
-  ln -s "$DATOMIC_FREE_HOME/datomic-free-$version" $DATOMIC_FREE_ACTIVE
+  ln -s "$DATOMIC_FREE_VERSIONS/datomic-free-$version" $DATOMIC_FREE_ACTIVE
 }
 
 download-datomic () {
   version="$1"
 
-  if [ ! -d "$DATOMIC_FREE_HOME/datomic-free-$version" ]; then
+  if [ ! -d "$DATOMIC_FREE_VERSIONS/datomic-free-$version" ]; then
     set +e
     curl -s --head "http://downloads.datomic.com/$version/datomic-free-$version.zip" | head -n 1 | grep -q 200
     grep_exit_status=$?
