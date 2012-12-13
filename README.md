@@ -23,7 +23,7 @@ $ cp -R $OLD_DATOMIC_REPO/data  ~/.datomic-free/
 Whenever you'd like to update to the latest Datomic Free:
 
 ```sh
-$ bin/datomic-free update
+$ datomic-free update
 ```
 
 This new version is now the active datomic-free version. Since datomic-free keeps data outside
@@ -32,13 +32,13 @@ of versions in ~/.datomic-free/data, you use the same data across versions *by d
 To update to a specific version, pass a version:
 
 ```sh
-$ bin/datomic-free update 0.8.3627
+$ datomic-free update 0.8.3627
 ```
 
 To use another version you've already installed:
 
 ```sh
-$ bin/datomic-free use 0.8.3646
+$ datomic-free use 0.8.3646
 ```
 
 ## License
