@@ -7,14 +7,17 @@ start Datomic Free transactors and upgrade to newer versions.
 For first time users:
 
 ```sh
-$ git clone https://github.com/cldwalker/datomic-free.git
-$ cd datomic-free
-$ bin/datomic-free start
+$ git clone https://github.com/cldwalker/datomic-free.git ~/.datomic-free
+$ ~/.datomic-free/bin/datomic-free start
+
+# To make it easy to use `datomic-free` add an alias to your bashrc/zshrc
+$ echo 'alias datomic-free=$HOME/.datomic-free/bin/datomic-free' >> ~/.zshrc
+$ . ~/.zshrc
+$ datomic-free start
 
 # If you have existing data you want to bring to datomic-free
 $ rm -rf ~/.datomic-free/data
 $ cp -R $OLD_DATOMIC_REPO/data  ~/.datomic-free/
-
 ```
 
 Whenever you'd like to update to the latest Datomic Free:

@@ -82,7 +82,7 @@ case "$command" in
   ;;
 "start")
   if [ ! -d $DATOMIC_FREE_ACTIVE ]; then
-    echo No previous datomic-free installation detected. Setting you up...
+    echo datomic-free has not been activated yet. datomicizing...
     mkdir -p $DATOMIC_FREE_HOME
     download-latest-datomic
   fi
