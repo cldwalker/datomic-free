@@ -47,6 +47,7 @@ See LICENSE.txt. This project is in no way affiliated with Datomic (Metadata Par
 ## Credits
 * Thanks to @richhickey and @stuarthalloway for datomic
 * Thanks to @rkneufeld for the downloading function of the shell script
+* Bug fixes: @sherbondy
 
 ## TODO
 * Allow other config and args to bin/transactor
