@@ -22,9 +22,11 @@ download-and-use-datomic () {
   unzip datomic-free.zip > /dev/null
   rm datomic-free.zip
 
-  echo "Installing datomic-free-$version in local maven repository..."
-  cd $DATOMIC_FREE_VERSIONS/datomic-free-$version
-  $DATOMIC_FREE_VERSIONS/datomic-free-$version/bin/maven-install > /dev/null
+  if command -v mvn > /dev/null 2>&1; then
+    echo "Installing datomic-free-$version in local maven repository..."
+    cd $DATOMIC_FREE_VERSIONS/datomic-free-$version
+    $DATOMIC_FREE_VERSIONS/datomic-free-$version/bin/maven-install > /dev/null
+  fi
 
   use-datomic $version
   echo "Done. Datomic Free $version is now available."
