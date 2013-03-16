@@ -96,7 +96,7 @@ case "$command" in
 
   cd $DATOMIC_FREE_ACTIVE
   echo "Starting $(basename $(readlink $DATOMIC_FREE_ACTIVE))..."
-  bin/transactor config/samples/free-transactor-template.properties
+  bin/transactor "${2:-config/samples/free-transactor-template.properties}"
   ;;
 "update")
   if [ "$2" != "" ]; then
