@@ -1,3 +1,6 @@
+## 0.3.0
+* start takes an optional properties file
+
 ## 0.2.1
 * Fix maven-install to not fail on systems without mvn
 
