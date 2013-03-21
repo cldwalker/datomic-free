@@ -10,15 +10,15 @@ For first time users:
 $ git clone https://github.com/cldwalker/datomic-free.git ~/.datomic-free
 $ ~/.datomic-free/bin/datomic-free start
 
-# You can specify transactor.properties (Absolute path only)
-$ ~/.datomic-free/bin/datomic-free start /absolute/path/to/transactor.properties
-
 # To make it easy to use `datomic-free` add an alias to your bashrc/zshrc
 $ echo 'alias datomic-free=$HOME/.datomic-free/bin/datomic-free' >> ~/.zshrc
 $ . ~/.zshrc
 $ datomic-free start
 
-# If you have existing data you want to bring to datomic-free
+# To specify transactor.properties (Absolute path only)
+$ datomic-free start /absolute/path/to/transactor.properties
+
+# To migrate existing data/ to datomic-free
 $ rm -rf ~/.datomic-free/data
 $ cp -R $OLD_DATOMIC_REPO/data  ~/.datomic-free/
 ```
