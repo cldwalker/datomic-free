@@ -7,8 +7,8 @@ DATOMIC_FREE_ACTIVE=$DATOMIC_FREE_HOME/active
 DATOMIC_FREE_DATA=$DATOMIC_FREE_HOME/data
 
 get-latest-datomic-version () {
-  curl -s http://downloads.datomic.com/free.html | grep -o 'datomic-free.*latest' |
-    sed 's/datomic-free-\(.*\)\.zip.*$/\1/g'
+  curl -s https://my.datomic.com/downloads/free | grep 'latest' |
+    sed 's/.*datomic-free-\(.*\)\.zip.*$/\1/g'
 }
 
 # mostly from https://github.com/relevance/diametric/blob/master/script/vendor-datomic-free
