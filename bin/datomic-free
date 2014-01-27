@@ -18,7 +18,7 @@ download-and-use-datomic () {
   echo "Downloading Datomic Free $version..."
   mkdir -p $DATOMIC_FREE_VERSIONS
   cd $DATOMIC_FREE_VERSIONS
-  curl --progress-bar -o datomic-free.zip "http://downloads.datomic.com/$version/datomic-free-$version.zip"
+  curl -L --progress-bar -o datomic-free.zip "https://my.datomic.com/downloads/free/$version"
   unzip datomic-free.zip > /dev/null
   rm datomic-free.zip
 
@@ -54,7 +54,7 @@ download-datomic () {
 
   if [ ! -d "$DATOMIC_FREE_VERSIONS/datomic-free-$version" ]; then
     set +e
-    curl -s --head "http://downloads.datomic.com/$version/datomic-free-$version.zip" | head -n 1 | grep -q 200
+    curl -s -i "https://my.datomic.com/downloads/free/$version" | head -n 1 | grep -q 302
     grep_exit_status=$?
     set -e
 
@@ -62,7 +62,7 @@ download-datomic () {
       download-and-use-datomic $version
       update-data-dir $version
     else
-      echo \"$version\" is not a valid version. See http://downloads.datomic.com/free.html for a list of versions.
+      echo \"$version\" is not a valid version. See https://my.datomic.com/downloads/free for a list of versions.
     fi
 
   else
