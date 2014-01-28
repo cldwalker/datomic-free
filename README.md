@@ -1,5 +1,5 @@
 ## Description
-A wrapper around [Datomic Free](http://downloads.datomic.com/free.html) that makes it easy to
+A wrapper around [Datomic Free](https://my.datomic.com/downloads/free) that makes it easy to
 start Datomic Free transactors and upgrade to newer versions.
 
 ## Usage
