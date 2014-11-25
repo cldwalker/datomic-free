@@ -22,14 +22,14 @@
     "Orlin M Bozhinov <om@soundsapiens.com>"
   ],
   "bin": {
-    "datomic-free": "./bin/bon-run"
+    "datomic-free": "./bin/bon/run"
   },
   "dependencies": {
     "bon": "^0.1.0"
   },
   "devDependencies": {},
   "scripts": {
-    "preinstall": "./bin/bon-install"
+    "preinstall": "./bin/bon/install"
   },
   "engines": {
     "node": "0.10.x"

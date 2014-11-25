@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# NOTE: you should not run this, but instead the following command:
+# npm i -g datomic-free
+
 # installs bon globally, node & npm expected
 npm i -g bon
 
