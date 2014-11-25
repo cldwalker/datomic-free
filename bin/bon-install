@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# installs bon globally, node & npm expected
+npm i -g bon
+
+# clones datomic-free if it doesn't already exist
+if [[ ! -d ~/.datomic-free ]]; then
+  git clone https://github.com/cldwalker/datomic-free.git ~/.datomic-free
+fi

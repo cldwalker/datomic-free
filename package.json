@@ -28,7 +28,9 @@
     "bon": "^0.1.0"
   },
   "devDependencies": {},
-  "scripts": {},
+  "scripts": {
+    "preinstall": "./bin/bon-install"
+  },
   "engines": {
     "node": "0.10.x"
   },
