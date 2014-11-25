@@ -3,10 +3,21 @@
 # NOTE: you should not run this, but instead the following command:
 # npm i -g datomic-free
 
-# installs bon globally, node & npm expected
-npm i -g bon
+echo #\n
+
+# installs bon globally, node & npm expected,
+# but only if it is not already found
+if which bon >/dev/null; then
+  echo "Note: bon is already installed."
+  echo
+else
+  npm i -g bon
+fi
 
 # clones datomic-free if it doesn't already exist
-if [[ ! -d ~/.datomic-free ]]; then
+if [[ -d ~/.datomic-free ]]; then
+  echo "Note: datomic-free already exists."
+  echo
+else
   git clone https://github.com/cldwalker/datomic-free.git ~/.datomic-free
 fi
