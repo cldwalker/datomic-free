@@ -1,21 +1,11 @@
 #!/usr/bin/env bash
 
-# NOTE: you should not run this, but instead the following command:
+# NOTE: you should not have to run this directly, rather:
 # npm i -g datomic-free
-
-echo #\n
-
-# installs bon globally, node & npm expected,
-# but only if it is not already found
-if which bon >/dev/null; then
-  echo "Note: bon is already installed."
-  echo
-else
-  npm i -g bon
-fi
 
 # clones datomic-free if it doesn't already exist
 if [[ -d ~/.datomic-free ]]; then
+  echo
   echo "Note: datomic-free already exists."
   echo
 else

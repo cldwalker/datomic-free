@@ -29,7 +29,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "preinstall": "./bin/bon/install"
+    "install": "./bin/bon/install"
   },
   "engines": {
     "node": "0.10.x"
