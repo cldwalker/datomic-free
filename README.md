@@ -6,7 +6,7 @@ start Datomic Free transactors and upgrade to newer versions.
 
 For first time users:
 
-### With NPM
+### With NPM (Node.js)
 
 [![NPM](https://nodei.co/npm/datomic-free.png?mini=true)](https://www.npmjs.org/package/datomic-free)
 
@@ -19,10 +19,13 @@ $ ~/.datomic-free/bin/datomic-free start
 # To make it easy to use `datomic-free` add an alias to your bashrc/zshrc
 $ echo 'alias datomic-free=$HOME/.datomic-free/bin/datomic-free' >> ~/.zshrc
 $ . ~/.zshrc
-$ datomic-free start
 ```
 
 ## Usage
+
+```sh
+$ datomic-free start
+```
 
 To specify transactor.properties, only with an absolute path:
 
