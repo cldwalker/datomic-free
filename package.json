@@ -1,6 +1,6 @@
 {
   "name": "datomic-free",
-  "description": "npm wrapper for @cldwalker's datomic-free wrapper",
+  "description": "npm use of @cldwalker's datomic-free wrapper",
   "keywords": [
     "datomic",
     "datomic-free",
@@ -8,28 +8,31 @@
     "upgrade",
     "start"
   ],
-  "version": "0.0.1",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/orlin/datomic-free.git"
+    "url": "git://github.com/datomicon/datomic-free.git"
   },
   "bugs": {
     "mail": "om@soundsapiens.com",
     "url": "https://github.com/cldwalker/datomic-free/issues"
   },
-  "author": "Gabriel Horner <gabriel.horner@gmail.com>",
+  "author": "Gabriel Horner <gabriel.horner@gmail.com> (https://github.com/cldwalker)",
   "contributors": [
-    "Orlin M Bozhinov <om@soundsapiens.com>"
+    "Orlin M Bozhinov <om@soundsapiens.com> (https://github.com/orlin)"
   ],
   "bin": {
     "datomic-free": "./bin/bon/run"
   },
+  "preferGlobal": true,
   "dependencies": {
-    "bon": "^0.1.0"
+    "bon": "^0.1.1",
+    "install-g": "*"
   },
   "devDependencies": {},
   "scripts": {
-    "install": "./bin/bon/install"
+    "preinstall": "./bin/bon/install",
+    "install": "./node_modules/.bin/install-g"
   },
   "engines": {
     "node": "0.10.x"

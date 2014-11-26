@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
-# NOTE: you should not have to run this directly, rather:
-# npm i -g datomic-free
+# NOTE: you should not have to run this directly.
 
 # clones datomic-free if it doesn't already exist
 if [[ -d ~/.datomic-free ]]; then
   echo
-  echo "Note: datomic-free already exists."
+  echo "Note: ~/.datomic-free/ does already exist."
   echo
 else
   git clone https://github.com/cldwalker/datomic-free.git ~/.datomic-free
