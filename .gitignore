@@ -1,4 +1,10 @@
-.gitignore
+.DS_Store
+*~
+.#*
+
 active
 data
 versions
+
+node_modules
+npm-debug.log

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+BON_SCRIPT="./bin/datomic-free"
+
+source bon "$@" # provided bon is installed globally

@@ -2,9 +2,15 @@
 A wrapper around [Datomic Free](https://my.datomic.com/downloads/free) that makes it easy to
 start Datomic Free transactors and upgrade to newer versions.
 
-## Usage
+## Installation
 
 For first time users:
+
+### With NPM
+
+[![NPM](https://nodei.co/npm/datomic-free.png?mini=true)](https://www.npmjs.org/package/datomic-free)
+
+### Manually
 
 ```sh
 $ git clone https://github.com/cldwalker/datomic-free.git ~/.datomic-free
@@ -14,16 +20,24 @@ $ ~/.datomic-free/bin/datomic-free start
 $ echo 'alias datomic-free=$HOME/.datomic-free/bin/datomic-free' >> ~/.zshrc
 $ . ~/.zshrc
 $ datomic-free start
+```
 
-# To specify transactor.properties (Absolute path only)
+## Usage
+
+To specify transactor.properties, only with an absolute path:
+
+```sh
 $ datomic-free start /absolute/path/to/transactor.properties
+```
 
-# To migrate existing data/ to datomic-free
+To migrate existing data/ to datomic-free:
+
+```sh
 $ rm -rf ~/.datomic-free/data
 $ cp -R $OLD_DATOMIC_REPO/data  ~/.datomic-free/
 ```
 
-Whenever you'd like to update to the latest Datomic Free:
+Whenever you'd like to update to the latest datomic-free:
 
 ```sh
 $ datomic-free update
@@ -45,14 +59,17 @@ $ datomic-free use 0.8.3646
 ```
 
 ## License
+
 See LICENSE.txt. This project is in no way affiliated with Datomic (Metadata Partners, LLC).
 
 ## Credits
+
 * Thanks to @richhickey and @stuarthalloway for datomic
 * Thanks to @rkneufeld for the downloading function of the shell script
 * Bug fixes: @sherbondy
 
 ## TODO
+
 * Allow other config and args to bin/transactor
 * rest command to execute bin/rest
 * better help
