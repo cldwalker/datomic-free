@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# check for $NODE_PATH and try to set it if missing
+# check for $NODE_PATH and try to guess-set it if missing
 [[ -n "${NODE_PATH}" ]] || export NODE_PATH="$(dirname $(which npm))/../lib/node_modules"
 
 if [[ ! -d $NODE_PATH ]]; then

@@ -10,6 +10,8 @@ For first time users:
 
 [![NPM](https://nodei.co/npm/datomic-free.png?mini=true)](https://www.npmjs.org/package/datomic-free)
 
+If `datomic-free` doesn't work, set / export `$NODE_PATH` to the dir containing global `node_modules`.
+
 ### Manually
 
 ```sh
