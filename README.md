@@ -12,7 +12,12 @@ For first time users:
 
 If `datomic-free` doesn't work, set / export `$NODE_PATH` to the dir containing global `node_modules`.
 
-### Manually
+Also, please choose either the `npm` approach above or the manual one below.
+If you do both, the script may not run as it should.
+To test if that might be the case: run `type -a datomic-free`
+for which there should be only one `datomic-free`.
+
+### Manually (zsh)
 
 ```sh
 $ git clone https://github.com/cldwalker/datomic-free.git ~/.datomic-free
