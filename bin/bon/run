@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
-BON_SCRIPT="./bin/datomic-free"
+# check for $NODE_PATH and try to set it if missing
+[[ -n "${NODE_PATH}" ]] || export NODE_PATH="$(dirname $(which npm))/../lib/node_modules"
 
-source bon "$@" # provided bon is installed globally
+if [[ ! -d $NODE_PATH ]]; then
+  echo "Please set \$NODE_PATH - assumed ${NODE_PATH} does not exist."
+  exit 1
+fi
+
+export BON_SCRIPT="bin/datomic-free"
+
+source bon "$@"
